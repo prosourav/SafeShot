@@ -1,0 +1,31 @@
+POST http://localhost:8000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email":"admin@example.com",
+  "password":"PassWord123"
+}
+
+
+###
+POST  http://localhost:8000/api/v1/appointments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDAxOTEwYzllZDc1OTMzZTQ1NDk0MiIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ1MzU5MDAsImV4cCI6MTY5NDU3MTkwMH0.swjq3Y02TS4CGgow2vzlyDLxfuiG9tN-8pOyrSQEU7I
+
+{
+  "vaccine": "Viral",
+  "date": "2023-09-11"
+}
+
+###
+GET  http://localhost:8000/api/v1/appointments?page=1&limit=2&sort_by=createdAt&sort_type=dsc
+Content-Type: application/application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDAxOTEwYzllZDc1OTMzZTQ1NDk0MiIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ1MzU5MDAsImV4cCI6MTY5NDU3MTkwMH0.swjq3Y02TS4CGgow2vzlyDLxfuiG9tN-8pOyrSQEU7I
+
+
+###
+GET  http://localhost:8000/api/v1/appointments/6501343662c8cd16c4d5fe4d?expand=user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDAxOTEwYzllZDc1OTMzZTQ1NDk0MiIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ2MDgzNDAsImV4cCI6MTY5NDY0NDM0MH0.LIdcacvkfK1DtRqpUx7VDiGqN0RaMKjZCOd5QQ0NJig
+# sourav token
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDAxNmFkYzllZDc1OTMzZTQ1NDkzMyIsIm5hbWUiOiJTb3VyYXYgU2FoYSIsImVtYWlsIjoic291cmF2QGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTQ2MDcxNTUsImV4cCI6MTY5NDY0MzE1NX0.CrFwqwGdoEek1ILVK8T2PQxeGtpL9nKrXk_-zJO0t0k
