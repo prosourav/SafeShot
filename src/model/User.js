@@ -25,13 +25,12 @@ const userSchema = new Schema(
       enum: ['approved', 'blocked'],
       default: 'approved',
     },
-    vaccines: [{
-      type: Schema.ObjectId,
-      ref: 'Vaccine',
-    }],
+    vaccines: {
+      type: [String],
+      enum: ['Pnemonia', 'Viral', 'Covid']
+    },
+
   },
-  // if we mention id to be false then we don't get any access model.id property
-  // { timestamps: true, id: false },
   { timestamps: true },
 
 );

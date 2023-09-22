@@ -14,7 +14,7 @@ servers:
   - description: Dev
     url: 'http://localhost:8000/api/v1'
   - description: SwaggerHub API Auto Mocking
-    url: >-
+    url: 
       https://virtserver.swaggerhub.com/Learning-SwaggerAPI/Vaccination-API/1.0.0
 tags:
   - name: Auth
@@ -879,11 +879,19 @@ paths:
                     format: url
                     example: https://s3.aws.com/myfirstblog/134.jpg
                   vaccination:
-                        type: string
-                        enum: 
-                          - Covisheild
-                          - Pnemonia
-                        example: ["Covisheild", "Pnemonia"]
+                        type: array
+                        items:
+                          type: string
+                          enum: ["complete", "pending"]
+                  status:
+                    type: string
+                    enum: ['pending', 'complete']
+                    example: 'complete'
+                  password: 
+                    type: string
+                    format: password
+                    example: 'password'
+
       responses:
         '200':
           description: User data updated successfully
@@ -1029,13 +1037,16 @@ paths:
             schema:
               type: object
               properties:
-                review-text:
+                body:
                   type: string
                   example: 'Sample review text'
-                vaccineId:
+                vaccinetedId:
                   type: string
                   example: '123#'
-              required: [review-text, vaccineId]
+                appointmentId:
+                  type: string
+                  example: '123#'
+              required: [body, vaccinetedId,appointmentId]
       responses:
         "201":
          description: Review posted successully
@@ -1270,130 +1281,6 @@ paths:
         '401':
           $ref: '#/components/responses/401'  
   '/vaccins/{id}':
-    get: 
-     operationId: getSinglevaccine
-     security: 
-        - bearerAuth: []
-     tags: [Doctor, Admin]
-     description: Get a single vaccine detail
-     parameters:
-        - $ref: '#/components/parameters/idPathParam'
-     responses:
-        '200':
-          description: Vaccine's data fetched successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                    example: 200
-                  message:
-                    type: string
-                    example: Vaccine data fetched successfully
-                  data:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        example: Pnemonia shot
-                      vaccine-id:
-                        type: string
-                        example: "#jdsfhjf"
-                      createdAt:
-                        type: string
-                        format: date-time
-                      updatedAt:
-                        type: string
-                        format: date-time
-                  links:
-                    type: object
-                    properties:
-                      vaccine:
-                        type: string
-                        example: /vaccines
-                      users:
-                        type: string
-                        example: /users
-                        
-        '400':
-          $ref: '#/components/responses/400'
-        '500':
-          $ref: '#/components/responses/500'
-        '401':
-          $ref: '#/components/responses/401'
-    put: 
-      operationId: updateVaccine
-      security: 
-        - bearerAuth: []
-      description: Update a vaccine
-      parameters:
-        - $ref: '#/components/parameters/idPathParam'
-      tags:
-        - Admin
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: 'Viral shot'
-                vaccine-id:
-                  type: string
-                  example: 65#bdh
-              required:
-                - name
-                - vaccine-id
-      responses:
-        '201':
-          description: Vaccine updated successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                    example: 201
-                  message:
-                    type: string
-                    example:  Vaccine updated successfully
-                  data:
-                    type: object
-                    properties:
-                      id:
-                       type: string
-                       example: g#dsjhdfhg
-                      name: 
-                        type: string
-                        example: John Doe
-                      email:
-                        type: string
-                        format: email
-                        example: john@abc.com
-                  links:
-                    type: object
-                    properties:
-                      self:
-                        type: string
-                        example: /vaccins
-                      users:
-                        type: string
-                        example: /users
-                      reviews: 
-                        type: string
-                        example: /reviews
-        '400':
-          $ref: '#/components/responses/400'
-        '500':
-          $ref: '#/components/responses/500'
-        '401':
-          $ref: '#/components/responses/401'  
     delete:
       operationId: deleteVaccine
       security:
@@ -1412,7 +1299,7 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
-  '/change-admin':
+  '/api/v1/change_admin/{id}':
    patch:
       operationId: changeAdmin
       security:
@@ -1420,15 +1307,8 @@ paths:
       tags:
         - Admin
       description: Change Admin 
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: Admin
+      parameters:
+        - $ref: '#/components/parameters/idPathParam'
       responses:
         '200':
           description: Admin updated successful
@@ -1784,6 +1664,13 @@ components:
       schema:
         type: string
         example: sourav
+    idQueryParam:
+      in: query
+      name: appointment
+      description: item identifier
+      schema:
+        type: string
+        example: 1
     idPathParam:
       in: path
       name: id

@@ -1,4 +1,4 @@
-const appointmentService = require('../../../../lib/appointment');
+const reviewService = require('../../../../lib/review');
 
 const updateItem = async (req, res, next) => {
   const { id } = req.params;
@@ -8,14 +8,14 @@ const updateItem = async (req, res, next) => {
     if (req.user.role === 'user') {
       delete payload.status;
     }
-    const appointment = await appointmentService.updateItem(id, payload);
-    delete appointment._id;
+    const review = await reviewService.updateItem(id, payload);
+    delete review._id;
     const response = {
       code: 200,
-      message: 'Appointment updated successfully',
-      data: appointment,
+      message: 'Reviews updated successfully',
+      data: review,
       links: {
-        self: `/appointments/${appointment.id}`,
+        self: `/reviewss/${id}`,
       },
     };
 

@@ -12,12 +12,12 @@ const vaccineSchema = new Schema(
       required: true,
     },
     expiry: {
-      type: string,
+      type: String,
+      required: true,
     }
-   
   },
   { timestamps: true, id: true }
 );
 
-const Vaccine = model('User', vaccineSchema);
+const Vaccine = model('Vaccine', vaccineSchema);
 module.exports = Vaccine;

@@ -1,5 +1,7 @@
 const { authorizationError } = require('../../utils/error');
 const appointmentService = require('../../lib/appointment');
+const reviewService = require('../../lib/review');
+
 
 const hasPermission =
   (model = '') =>
@@ -13,7 +15,25 @@ const hasPermission =
           return next();
         }
         return next(authorizationError());
+      } else if (model === 'User') {
+        const isOwner = req.params.id === req.user.id;
+        console.log(isOwner, req.params.id, req.user.id)
+
+        if (isOwner || req.user.role === 'doctor' || req.user.role === 'admin') {
+          return next();
+        }
+        return next(authorizationError());
+      } else if (model === 'Review') {
+        const isOwner = await reviewService.checkOwnership({
+          resourceId: req.params.id,
+          userId: req.user.id,
+        });
+        if (isOwner || req.user.role === 'doctor' || req.user.role === 'admin') {
+          return next();
+        }
+        return next(authorizationError());
       }
+
     };
 
 module.exports = hasPermission;

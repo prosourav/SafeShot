@@ -4,10 +4,18 @@ const reviewSchema = new Schema(
   {
     user: {
       type: Schema.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      required: true
     },
-    vaccine: Schema.ObjectId,
-    body: String,
+    appointmentId: {
+      type: Schema.ObjectId,
+      ref: 'Appointment',
+      required: true
+    },
+    body: {
+      type: String,
+      required: true
+    },
     status: {
       type: String,
       enum: ['pending', 'approved', 'rejected'],
@@ -15,7 +23,7 @@ const reviewSchema = new Schema(
     },
 
   },
-  { timestamps: true, id: true },
+  { timestamps: true }
 );
 
 const Review = model('Review', reviewSchema);

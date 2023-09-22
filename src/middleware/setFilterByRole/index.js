@@ -2,7 +2,6 @@ const { authorizationError } = require("../../utils/error");
 
 const setFilterByRole = (req, _res, next) => {
   const { user } = req;
-
   if (user.role === 'admin' || user.role === 'doctor') {
     req.filter = {};
     next();

@@ -5,6 +5,9 @@ const config = {
   sortType: 'dsc',
   sortBy: 'updatedAt',
   search: '',
+  expands: [],
+  status: 'pending',
+  reviewFilter: 'approved',
 };
 
 module.exports = Object.freeze(config);

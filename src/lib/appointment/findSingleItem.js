@@ -1,4 +1,5 @@
 const Appointment = require("../../model/Appoinment");
+const { notFound } = require("../../utils/error");
 
 const findSingleItem = async ({ id, expand = '' }) => {
   if (!id) throw new Error('Id is required');
