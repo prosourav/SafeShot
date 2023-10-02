@@ -54,6 +54,10 @@ It is a software where use can signup and book appointment to take vaccine, and 
 ```http
   PATCH /api/v1/items/${id}
 ```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
 #### Delete Item
 
 ```http
