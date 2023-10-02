@@ -75,14 +75,6 @@ It is a software where use can signup and book appointment to take vaccine, and 
 
 ## Environment Variables
 
-DB_URL_QUERY = ''
-
-
-DB_NAME ='safeshot_vaccination'
-
-
-ACCESS_TOKEN_SECRET = 'Secret'
-
 To run this project, you will need to add the following environment variables to your .env file
 
 `PORT` In which port your app will run on local mechine
