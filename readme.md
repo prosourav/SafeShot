@@ -76,6 +76,8 @@ It is a software where use can signup and book appointment to take vaccine, and 
 ## Environment Variables
 
 DB_URL_QUERY = ''
+
+
 DB_NAME ='safeshot_vaccination'
 
 
